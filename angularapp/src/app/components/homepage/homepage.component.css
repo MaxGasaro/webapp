@@ -1,0 +1,67 @@
+.main-container {
+    max-width: 1980px;
+    width: 100%;
+}
+
+section {
+    width: 100%;
+    height: 500px;
+}
+
+.jumbotron {
+    background-image: url('../../../assets/images/jumbotron.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.whatUCanDo {
+    background-color: #f6f6f6;
+}
+
+.whatUCanDo, .howAppWorks {
+    display: flex;
+}
+
+.section-left, .section-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.section-left {
+    align-items: flex-end;
+}
+
+.section-right {
+    align-items: flex-start;
+}
+
+#doing {
+    object-fit: contain;
+    max-width: 75%;
+    max-height: 75%;
+}
+
+.whatUCanDo p {
+    width: 50%;
+}
+
+.howAppWorks {
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    background-color: #fee195;
+}
+
+.howAppWorks ul {
+    list-style: circle;
+}
+
+.howAppWorks ul li {
+    margin: 1.3rem 0;
+}
+
+.howAppWorks h4 {
+    font-size: 1.4rem;
+}
