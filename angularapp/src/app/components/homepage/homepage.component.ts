@@ -10,15 +10,22 @@ export class HomepageComponent implements OnInit {
 
   public forecasts?: WeatherForecast[];
 
-  constructor(http: HttpClient) {
-    http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
-      this.forecasts = result;
-    }, error => console.error(error));
+  public users: any;
+
+  constructor(private http: HttpClient) {
+    // http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
+    //   this.forecasts = result;
+    // }, error => console.error(error));
   }
 
   title = 'angularapp';
 
   ngOnInit(): void {
+    this.http.get(`https://localhost:7009/api/Users`).subscribe({
+      next: result => this.users = result,
+      error: (error) => console.log(error),
+      complete: () => {console.log(this.users)}
+    })
   }
 }
 
@@ -29,5 +36,5 @@ interface WeatherForecast {
   summary: string;
 }
 
-  
+
 

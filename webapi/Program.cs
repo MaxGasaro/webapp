@@ -38,20 +38,20 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes(builder.Configuration.GetSection("Jwt:Key").Value)),
-            ValidateIssuer = true,
-            ValidateAudience = true,
-            ValidIssuer = configuration.GetSection("Jwt:Issuer").Value,
-            ValidAudience = configuration.GetSection("Jwt:Audience").Value
-        };
-    });
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//        options.TokenValidationParameters = new TokenValidationParameters
+//        {
+//            ValidateIssuerSigningKey = true,
+//            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
+//                .GetBytes(builder.Configuration.GetSection("Jwt:Key").Value)),
+//            ValidateIssuer = true,
+//            ValidateAudience = true,
+//            ValidIssuer = configuration.GetSection("Jwt:Issuer").Value,
+//            ValidAudience = configuration.GetSection("Jwt:Audience").Value
+//        };
+//    });
 
 // Enable CORS policy to do API call
 builder.Services.AddCors(c =>
