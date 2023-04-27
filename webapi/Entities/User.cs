@@ -1,4 +1,7 @@
-﻿namespace webapi.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace webapi.Entities
 {
     public class User
     {
