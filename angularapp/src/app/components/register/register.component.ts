@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { UserRegister } from 'src/app/models/register';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
   strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
-  constructor(private toast: ToastrService) { }
+  constructor(private toast: ToastrService, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -27,6 +29,15 @@ export class RegisterComponent implements OnInit {
 
   public register() {
     console.log(this.form); // debug
+    if(this.form.valid) {
+      const userReg: UserRegister = this.form.value;
+      this.authService.register(userReg).subscribe({
+        next: response => {
+          console.log(response); // debug
+        },
+        error: err => console.log(err)
+      })
+    }
     // if (this.form.valid) {
     //   this.submitEM.emit(this.form.value);
     // }

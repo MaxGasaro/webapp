@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, map} from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { UserLogin } from '../models/login';
+import { UserRegister } from '../models/register';
 import { User } from '../models/user';
 
 @Injectable({
@@ -48,11 +49,8 @@ export class AuthService {
    * @param user
    * @returns
    */
-  public register(user: User): Observable<any> {
-    return this.http.post<any>(
-      'https://localhost:7009/api/Auth/register',
-      user
-    );
+  public register(userRegister: UserRegister): Observable<any> {
+    return this.http.post<User>(`${this.baseUrl}auth/register`, userRegister);
   }
 
   public getMe(): Observable<string> {

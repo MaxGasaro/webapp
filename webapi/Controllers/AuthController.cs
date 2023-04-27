@@ -47,6 +47,7 @@ namespace webapi.Controllers
             using (var hmac = new HMACSHA512())
             {
                 user.Username = request.Username.ToLower();
+                user.Email = request.Email.ToLower();
                 user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password));
                 user.PasswordSalt = hmac.Key;
             }
