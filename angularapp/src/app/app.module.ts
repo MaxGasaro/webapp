@@ -16,13 +16,17 @@ import { RegisterComponent } from './components/register/register.component';
 
 import {ToastrModule} from 'ngx-toastr';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { NavComponent } from './shared/nav/nav.component';
+import { FooterComponent } from './shared/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     LoginComponent,
     RegisterComponent,
-    DashboardComponent
+    DashboardComponent,
+    NavComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, NoopAnimationsModule,

@@ -1,31 +1,6 @@
 <!-- HEADER - NAVBAR -->
 <header id="header">
-    <div class="container-header">
-        <div id="logo">
-            <img src="" alt="">
-        </div>
-        <div class="menu">
-            <ul>
-                <li>
-                    <a routerLink="homepage" routerLinkActive="active">Homepage</a>
-                </li>
-                <li>
-                    <a>About</a>
-                </li>
-                <li *ngIf="authService.currentUser$ | async">
-                    <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
-                </li>
-                <li *ngIf="authService.currentUser$ | async; else logoutBlock">
-                    <a id="logout" (click)="logout()">Logout</a>
-                </li>
-                <ng-template #logoutBlock>
-                  <li>
-                    <a routerLink="login" routerLinkActive="active">Login</a>
-                  </li>
-                </ng-template>
-            </ul>
-        </div>
-    </div>
+    <app-nav></app-nav>
 </header>
 
 <!-- MAIN - ROUTER OUTLET -->
@@ -34,6 +9,8 @@
 </main>
 
 <!-- FOOTER -->
-<footer></footer>
+<footer>
+  <app-footer></app-footer>
+</footer>
 
 
