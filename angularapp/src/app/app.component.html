@@ -12,12 +12,17 @@
                 <li>
                     <a>About</a>
                 </li>
-                <li>
-                    <a>Dashboard</a>
+                <li *ngIf="authService.currentUser$ | async">
+                    <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
                 </li>
-                <li>
+                <li *ngIf="authService.currentUser$ | async; else logoutBlock">
+                    <a id="logout" (click)="logout()">Logout</a>
+                </li>
+                <ng-template #logoutBlock>
+                  <li>
                     <a routerLink="login" routerLinkActive="active">Login</a>
-                </li>
+                  </li>
+                </ng-template>
             </ul>
         </div>
     </div>

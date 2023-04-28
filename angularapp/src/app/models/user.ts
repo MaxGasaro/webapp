@@ -1,4 +1,4 @@
 export class User {
-  username = "";
-  password = "";
+  public username: string = "";
+  public token: string = "";
 }

@@ -11,8 +11,8 @@ using webapi.Data;
 namespace webapi.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230421141121_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20230428081811_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,10 @@ namespace webapi.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<byte[]>("PasswordHash")
                         .IsRequired()

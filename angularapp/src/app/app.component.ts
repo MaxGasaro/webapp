@@ -1,26 +1,31 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from './models/user';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  public forecasts?: WeatherForecast[];
+export class AppComponent implements OnInit {
 
-  constructor(http: HttpClient) {
-    // http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
-    //   this.forecasts = result;
-    // }, error => console.error(error));
+  constructor(public authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.setCurrentUser();
   }
 
-  title = 'angularapp';
-}
+  setCurrentUser() {
+    const userString = localStorage.getItem("user");
+    if(!userString) return;
+    const user: User = JSON.parse(userString);
+    this.authService.setCurrentUser(user);
+  }
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
+  public logout() {
+    this.authService.logout();
+    this.router.navigateByUrl("");
+  }
 }

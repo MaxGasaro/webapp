@@ -1,8 +1,12 @@
-﻿namespace webapi.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace webapi.Entities
 {
     public class UserDto
     {
-        public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        [Required]
+        public string Username { get; set; }
+        [Required]
+        public string Token { get; set; } 
     }
 }

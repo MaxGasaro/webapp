@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
+using webapi.Data;
 using webapi.Entities;
 using webapi.Services;
 
@@ -16,11 +19,15 @@ namespace webapi.Controllers
         public static User user = new User();
         private readonly IConfiguration _configuration;
         private readonly IUserService _userService;
+        private readonly DataContext _context;
+        private readonly ITokenService _tokenService;
 
-        public AuthController(IConfiguration configuration, IUserService userService)
+        public AuthController(IConfiguration configuration, IUserService userService, DataContext context, ITokenService tokenService)
         {
             _configuration = configuration;
             _userService = userService;
+            _context = context;
+            this._tokenService = tokenService;
         }
 
         [HttpGet, Authorize]
@@ -30,37 +37,72 @@ namespace webapi.Controllers
             return Ok(userName);
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        [HttpPost("register")] // POST: api/Auth/register
+        public async Task<ActionResult<UserDto>> Register(RegisterDto request)
         {
-            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+            //CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            user.Username = request.Username;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            if (await UserExist(request.Username))
+                return BadRequest("Username already exist!");
+            using (var hmac = new HMACSHA512())
+            {
+                user.Username = request.Username.ToLower();
+                user.Email = request.Email.ToLower();
+                user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password));
+                user.PasswordSalt = hmac.Key;
+            }
 
-            return Ok(user);
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
+
+            //return Ok(user);
+            return new UserDto
+            {
+                Username = user.Username,
+                Token = _tokenService.CreateToken(user)
+            };
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<UserDto>> Login(LoginDto request)
         {
-            if (user.Username != request.Username)
+            user = await _context.Users.SingleOrDefaultAsync(x => x.Username == request.Username);
+
+            if(user == null)
+                return Unauthorized("Invalid Username");
+
+            using (var hmac = new HMACSHA512(user.PasswordSalt))
             {
-                return BadRequest("User not found.");
+                var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password));
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != user.PasswordHash[i])
+                        return Unauthorized("Invalid Password");
+                }
             }
 
-            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+            return new UserDto
             {
-                return BadRequest("Wrong password.");
-            }
+                Username = user.Username,
+                Token = _tokenService.CreateToken(user)
+            };
+            //return Ok(user);
+            //if (user.Username != request.Username)
+            //{
+            //    return BadRequest("User not found.");
+            //}
 
-            string token = CreateToken(user);
+            //if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+            //{
+            //    return BadRequest("Wrong password.");
+            //}
 
-            var refreshToken = GenerateRefreshToken();
-            SetRefreshToken(refreshToken);
+            //string token = CreateToken(user);
 
-            return Ok(token);
+            //var refreshToken = GenerateRefreshToken();
+            //SetRefreshToken(refreshToken);
+
+            //return Ok(token);
         }
 
         [HttpPost("refresh-token")]
@@ -149,6 +191,11 @@ namespace webapi.Controllers
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);
             }
+        }
+
+        private async Task<bool> UserExist(string username)
+        {
+            return await _context.Users.AnyAsync(x => x.Username == username.ToLower());
         }
     }
 }
