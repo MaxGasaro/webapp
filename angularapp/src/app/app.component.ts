@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from './models/user';
 import { AuthService } from './services/auth.service';
 
@@ -10,7 +11,7 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.setCurrentUser();
@@ -25,5 +26,6 @@ export class AppComponent implements OnInit {
 
   public logout() {
     this.authService.logout();
+    this.router.navigateByUrl("");
   }
 }

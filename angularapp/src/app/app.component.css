@@ -42,6 +42,10 @@ li>a{
     font-weight: bolder;
 }
 
+#logout:hover {
+  cursor: pointer;
+}
+
 /* MAIN */
 main {
     margin-top: 50px;

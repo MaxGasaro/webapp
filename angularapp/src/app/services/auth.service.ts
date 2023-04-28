@@ -31,6 +31,7 @@ export class AuthService {
           localStorage.setItem("user", JSON.stringify(user));
           this.currentUserSource.next(user);
         }
+        return user;
       })
     );
   }
@@ -50,7 +51,15 @@ export class AuthService {
    * @returns
    */
   public register(userRegister: UserRegister): Observable<any> {
-    return this.http.post<User>(`${this.baseUrl}auth/register`, userRegister);
+    return this.http.post<User>(`${this.baseUrl}auth/register`, userRegister).pipe(
+      map(user => {
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
+          this.currentUserSource.next(user);
+        }
+        return user;
+      })
+    );
   }
 
   public getMe(): Observable<string> {

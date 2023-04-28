@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserLogin } from 'src/app/models/login';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -10,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(user).subscribe({
         next: result => {
           console.log(result); // debug
+          this.router.navigateByUrl("dashboard")
         },
         error: err => console.log(err),
         complete: () => console.log("chiamata completata") // debug

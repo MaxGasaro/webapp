@@ -11,7 +11,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
 
-  @Input() usersFromHomepage: any;
+  // @Input() usersFromHomepage: any;
+  @Output() cancelRegister = new EventEmitter();
 
   strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
 
@@ -34,6 +35,7 @@ export class RegisterComponent implements OnInit {
       this.authService.register(userReg).subscribe({
         next: response => {
           console.log(response); // debug
+          this.cancel();
         },
         error: err => console.log(err)
       })
@@ -44,10 +46,10 @@ export class RegisterComponent implements OnInit {
   }
   // error: string | null;
 
-  // @Output() submitEM = new EventEmitter();
 
   public cancel() {
     console.log("canceled"); // debug
+    this.cancelRegister.emit(false);
   }
 }
 
