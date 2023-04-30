@@ -18,6 +18,7 @@ import {ToastrModule} from 'ngx-toastr';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { ProfileComponent } from './components/profile/profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     RegisterComponent,
     DashboardComponent,
     NavComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, NoopAnimationsModule,
@@ -35,7 +37,9 @@ import { FooterComponent } from './shared/footer/footer.component';
     MatButtonModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: "toast-bottom-right"
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

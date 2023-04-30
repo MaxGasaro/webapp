@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { UserLogin } from 'src/app/models/login';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -11,7 +12,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -31,14 +33,17 @@ export class LoginComponent implements OnInit {
           console.log(result); // debug
           this.router.navigateByUrl("dashboard")
         },
-        error: err => console.log(err),
+        error: err => {
+          console.log(err);
+          this.toastr.error(err.error);
+        },
         complete: () => console.log("chiamata completata") // debug
       })
     }
-    // if (this.form.valid) {
-    //   this.submitEM.emit(this.form.value);
-    // }
   }
+  // if (this.form.valid) {
+  //   this.submitEM.emit(this.form.value);
+  // }
   // error: string | null;
 
   // @Output() submitEM = new EventEmitter();

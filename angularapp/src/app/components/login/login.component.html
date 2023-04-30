@@ -1,30 +1,23 @@
-<mat-card>
-    <mat-card-title>Login</mat-card-title>
-    <mat-card-content>
+<div class="login-container">
+  <div class="login-box">
+    <h2>Login</h2>
     <form [formGroup]="form" (ngSubmit)="login()">
-      <p>
-        <mat-form-field>
-          <input type="text" matInput placeholder="Username" formControlName="username">
-        </mat-form-field>
-      </p>
-
-      <p>
-        <mat-form-field>
-          <input type="password" matInput placeholder="Password" formControlName="password">
-        </mat-form-field>
-      </p>
-
-      <!-- <p *ngIf="error" class="error">
-        {{ error }}
-      </p> -->
-
-      <div class="button">
-        <button type="submit" mat-button>Invia</button>
+      <div class="user-box">
+        <input type="text" name="" required="" formControlName="username">
+        <label>Username</label>
       </div>
-      <div class="button">
-        <span>Se non sei registrato: </span><button routerLink="/register" mat-button>Registrati</button>
+      <div class="user-box">
+        <input type="password" name="" required="" formControlName="password">
+        <label>Password</label>
       </div>
-
+      <button type="submit">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Submit
+      </button>
     </form>
-    </mat-card-content>
-</mat-card>
+  </div>
+</div>
+
