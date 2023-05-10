@@ -2,23 +2,43 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HomepageComponent } from './components/homepage/homepage.component';
-import { LoginComponent } from './components/login/login.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './components/register/register.component';
 
-import {ToastrModule} from 'ngx-toastr';
+// Components
+import { AppComponent } from './app.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NavComponent } from './shared/nav/nav.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ProfileComponent } from './components/profile/profile.component';
+
+// Toastr per popup
+import { ToastrModule } from 'ngx-toastr';
+
+// Font Awesome
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSquare as farSquare,
+  faCheckSquare as farCheckSquare,
+} from '@fortawesome/free-regular-svg-icons';
+import {
+  faStackOverflow,
+  faGithub,
+  faMedium,
+  faFacebook,
+  faTwitter,
+  faLinkedin,
+  faYoutube
+} from '@fortawesome/free-brands-svg-icons';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,8 +60,25 @@ import { ProfileComponent } from './components/profile/profile.component';
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right"
     }),
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private library: FaIconLibrary) {
+    library.addIcons(
+      faSquare,
+      faCheckSquare,
+      farSquare,
+      farCheckSquare,
+      faStackOverflow,
+      faGithub,
+      faMedium,
+      faFacebook,
+      faTwitter,
+      faLinkedin,
+      faYoutube
+    )
+  }
+}
