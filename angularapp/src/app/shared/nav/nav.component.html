@@ -7,9 +7,12 @@
           <li>
               <a routerLink="homepage" routerLinkActive="active">Homepage</a>
           </li>
-          <ng-container *ngIf="authService.currentUser$ | async">
+          <li>
+              <a routerLink="errors" routerLinkActive="active">Errors</a>
+          </li>
+          <ng-container *ngIf="(authService.currentUser$ | async) as user">
             <li>
-                <a routerLink="myprofile" routerLinkActive="active">My Profile</a>
+                <a routerLink="myprofile" routerLinkActive="active">My Profile {{user.username}}</a>
             </li>
             <li>
                 <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>

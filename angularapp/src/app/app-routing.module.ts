@@ -5,6 +5,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent},
     ]
   },
+  { path: 'errors', component: TestErrorComponent},
   { path: 'homepage', component: HomepageComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},

@@ -38,6 +38,7 @@ import {
   faLinkedin,
   faYoutube
 } from '@fortawesome/free-brands-svg-icons';
+import { TestErrorComponent } from './errors/test-error/test-error.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import {
     DashboardComponent,
     NavComponent,
     FooterComponent,
-    ProfileComponent
+    ProfileComponent,
+    TestErrorComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, NoopAnimationsModule,

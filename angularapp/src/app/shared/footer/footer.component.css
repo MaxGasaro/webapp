@@ -19,13 +19,14 @@
 
 /* The company logo */
 
-.footer-distributed h3{
-	font: normal 36px 'Open Sans', cursive;
-	margin: 2rem 0;
+.footer-distributed .footer-left .logo {
+  width: 50%;
+  max-height: 50%;
 }
 
-.footer-distributed h3 span{
-	color:  lightseagreen;
+.footer-distributed .footer-left .logo img {
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .footer-distributed .footer-company-name{
