@@ -5,6 +5,8 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { AuthGuard } from './_guards/auth.guard';
 
@@ -19,10 +21,12 @@ const routes: Routes = [
     ]
   },
   { path: 'errors', component: TestErrorComponent},
+  { path: 'not-found', component: NotFoundComponent},
+  { path: 'server-error', component: ServerErrorComponent},
   { path: 'homepage', component: HomepageComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  { path: '**', component: HomepageComponent, pathMatch: 'full'}
+  { path: '**', component: NotFoundComponent, pathMatch: 'full'}
 ]
 
 @NgModule({

@@ -36,6 +36,7 @@ namespace webapi.Controllers
         public ActionResult<string> GetServerError() 
         {
             var thing = _context.Users.Find(-1);
+            if (thing == null) return BadRequest("Server in error");
             var thingToReturn = thing.ToString();
             return thingToReturn;
         }
