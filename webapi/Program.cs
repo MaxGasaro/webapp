@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using webapi.Data;
+using webapi.Interfaces;
 using webapi.Middleware;
 using webapi.Services;
 
@@ -28,22 +29,24 @@ builder.Services.AddDbContext<DataContext>(opt =>
 //    opt.UseSqlServer(builder.Configuration.GetConnectionString("application-db"));
 //});
 
-builder.Services.AddScoped<IUserService, UserService>();
+//builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();  
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());    
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddSwaggerGen(options =>
-{
-    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
-    {
-        Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
-        In = ParameterLocation.Header,
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
-    });
+//builder.Services.AddSwaggerGen(options =>
+//{
+//    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+//    {
+//        Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
+//        In = ParameterLocation.Header,
+//        Name = "Authorization",
+//        Type = SecuritySchemeType.ApiKey
+//    });
 
-    options.OperationFilter<SecurityRequirementsOperationFilter>();
-});
+//    options.OperationFilter<SecurityRequirementsOperationFilter>();
+//});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -70,11 +73,11 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
 
 // use CORS policy that before i've instanced
 app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
@@ -86,5 +89,18 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<DataContext>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedUsers(context);
+} catch (Exception ex)
+{
+    var logger = services.GetService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred during migration");
+}
 
 app.Run();
