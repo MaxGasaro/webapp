@@ -42,6 +42,10 @@ import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { ErrorInterceptor } from './_interceptor/error.interceptor';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MemberListComponent } from './components/member-list/member-list.component';
+import { MemberCardComponent } from './members/member-card/member-card.component';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { MemberDetailComponent } from './components/member-detail/member-detail.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,10 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     ProfileComponent,
     TestErrorComponent,
     NotFoundComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    MemberListComponent,
+    MemberCardComponent,
+    MemberDetailComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, NoopAnimationsModule,
@@ -70,7 +77,8 @@ import { ServerErrorComponent } from './errors/server-error/server-error.compone
     FontAwesomeModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

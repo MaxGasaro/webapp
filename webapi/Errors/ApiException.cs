@@ -1,6 +1,4 @@
-﻿using Microsoft.Identity.Client;
-
-namespace webapi.Errors
+﻿namespace webapi.Errors
 {
     public class ApiException
     {

@@ -18,24 +18,24 @@ namespace webapi.Controllers
     {
         public static User user = new User();
         private readonly IConfiguration _configuration;
-        private readonly IUserService _userService;
+        //private readonly IUserService _userService;
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
 
-        public AuthController(IConfiguration configuration, IUserService userService, DataContext context, ITokenService tokenService)
+        public AuthController(IConfiguration configuration, DataContext context, ITokenService tokenService)
         {
             _configuration = configuration;
-            _userService = userService;
+            //_userService = userService;
             _context = context;
             this._tokenService = tokenService;
         }
 
-        [HttpGet, Authorize]
-        public ActionResult<string> GetMe()
-        {
-            var userName = _userService.GetMyName();
-            return Ok(userName);
-        }
+        //[HttpGet, Authorize]
+        //public ActionResult<string> GetMe()
+        //{
+        //    var userName = _userService.GetMyName();
+        //    return Ok(userName);
+        //}
 
         [HttpPost("register")] // POST: api/Auth/register
         public async Task<ActionResult<UserDto>> Register(RegisterDto request)

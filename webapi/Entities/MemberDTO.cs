@@ -6,10 +6,11 @@ namespace webapi.Entities
     {
         public int Id { get; set; }
         public string Username { get; set; } = string.Empty;
-        public int Age{ get; set; }
+        public int Age { get; set; }
         public string PhotoUrl { get; set; }
         public string Gender { get; set; }
         public DateOnly DateOfBirth { get; set; }
+        public DateTime LastActive { get; set; }
         public string KnownAs { get; set; }
         public DateTime Created { get; set; } = DateTime.UtcNow;
         public string Introduction { get; set; }

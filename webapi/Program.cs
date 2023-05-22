@@ -55,7 +55,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8
-                .GetBytes(builder.Configuration["Jwt:Key"])),
+                .GetBytes(builder.Configuration["TokenKey"])),
             ValidateIssuer = false,
             ValidateAudience = false
             //ValidIssuer = configuration.GetSection("Jwt:Issuer").Value,

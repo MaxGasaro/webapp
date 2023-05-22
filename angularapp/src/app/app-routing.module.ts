@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { LoginComponent } from './components/login/login.component';
+import { MemberDetailComponent } from './components/member-detail/member-detail.component';
+import { MemberListComponent } from './components/member-list/member-list.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
@@ -20,6 +22,8 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent},
     ]
   },
+  { path: 'member-list', component: MemberListComponent},
+  { path: 'member-list/:username', component: MemberDetailComponent},
   { path: 'errors', component: TestErrorComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: 'server-error', component: ServerErrorComponent},

@@ -21,7 +21,7 @@ namespace webapi.Controllers
             this._userRepository = userRepository;
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers() 
         { 
@@ -30,17 +30,18 @@ namespace webapi.Controllers
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
-        {
-            var user = await _userRepository.GetUserByIdAsync(id);
-            return user;
-        }
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<User>> GetUser(int id)
+        //{
+        //    var user = await _userRepository.GetUserByIdAsync(id);
+        //    return user;
+        //}
 
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDTO>> GetUser(string username)
         {
             return await _userRepository.GetMemberAsync(username);
         }
+
     }
 }

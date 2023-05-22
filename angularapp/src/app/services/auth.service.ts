@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map} from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { environment } from 'src/environments/environment';
 import { UserLogin } from '../models/login';
 import { UserRegister } from '../models/register';
 import { User } from '../models/user';
@@ -11,7 +12,7 @@ import { User } from '../models/user';
 })
 export class AuthService {
 
-  private baseUrl: string = "https://localhost:7009/api/";
+  private baseUrl: string = environment.apiUrl;
 
   private currentUserSource = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUserSource.asObservable();
