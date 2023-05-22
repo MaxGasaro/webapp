@@ -1,5 +1,5 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -7,7 +7,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Components
 import { AppComponent } from './app.component';
@@ -21,6 +21,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 
 // Toastr per popup
 import { ToastrModule } from 'ngx-toastr';
+
+// Loading
 
 // Font Awesome
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
@@ -46,6 +48,8 @@ import { MemberListComponent } from './components/member-list/member-list.compon
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { MemberDetailComponent } from './components/member-detail/member-detail.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { LoadingInterceptor } from './_interceptor/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -75,15 +79,21 @@ import { MemberDetailComponent } from './components/member-detail/member-detail.
       positionClass: "toast-bottom-right"
     }),
     FontAwesomeModule,
+    FormsModule,
+    NgxSpinnerModule.forRoot({
+      type: 'pacman'
+    })
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {
-  constructor(private library: FaIconLibrary) {
+  constructor(library: FaIconLibrary) {
     library.addIcons(
       faSquare,
       faCheckSquare,

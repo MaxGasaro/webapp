@@ -1,1 +1,27 @@
-<p>profile works!</p>
+<div *ngIf="member">
+  <h1>Your Profile</h1>
+  <h3 *ngIf="member">{{member.knownAs}}</h3>
+  <p *ngIf="editForm.dirty"><strong>Information: </strong>You have made changes. Any unsaved changes will be lost</p>
+  <div><strong>Location: </strong>{{member.city}}</div>
+  <div><strong>Age: </strong>{{member.age}}</div>
+  <div><strong>Last Active: </strong>{{member.lastActive}}</div>
+  <div><strong>Member Since: </strong>{{member.created}}</div>
+  <div>
+    <button [disabled]="!editForm.dirty" type="submit" form="editForm">Save changes</button>
+  </div>
+  <form [formGroup]="editForm" id="editForm" (ngSubmit)="updateMember()">
+    <textarea name="description" id="" rows="6" formControlName="introduction"></textarea>
+    <textarea name="lookingFor" id="" rows="6" formControlName="lookingFor"></textarea>
+    <textarea name="interests" id="" rows="6" formControlName="interests"></textarea>
+    <h4>Location Details: </h4>
+    <div>
+      <label for="city">City: </label>
+      <input type="text" formControlName="city" name="city">
+      <label for="country">Country: </label>
+      <input type="text" formControlName="country" name="country">
+    </div>
+  </form>
+  <div class="photo">
+    <h3>Edit Photos</h3>
+  </div>
+</div>

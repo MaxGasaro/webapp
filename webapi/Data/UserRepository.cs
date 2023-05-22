@@ -17,18 +17,18 @@ namespace webapi.Data
             _context = context;
         }
 
-        public async Task<MemberDTO> GetMemberAsync(string username)
+        public async Task<MemberDto> GetMemberAsync(string username)
         {
             return await _context.Users
                 .Where(x => x.Username == username)
-                .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<MemberDTO>> GetMembersAsync()
+        public async Task<IEnumerable<MemberDto>> GetMembersAsync()
         {
             return await _context.Users
-                .ProjectTo<MemberDTO>(_mapper.ConfigurationProvider)
+                .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }
 

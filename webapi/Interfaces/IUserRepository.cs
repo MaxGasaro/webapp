@@ -9,7 +9,7 @@ namespace webapi.Interfaces
         Task<IEnumerable<User>> GetUsersAsync();
         Task<User> GetUserByIdAsync(int id);
         Task<User> GetUserByUsernameAsync(string username);
-        Task<IEnumerable<MemberDTO>> GetMembersAsync();
-        Task<MemberDTO> GetMemberAsync(string username);
+        Task<IEnumerable<MemberDto>> GetMembersAsync();
+        Task<MemberDto> GetMemberAsync(string username);
     }
 }

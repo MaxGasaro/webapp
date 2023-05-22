@@ -11,6 +11,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChangedGuard } from './_guards/prevent-unsaved-changed.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/homepage', pathMatch: 'full'},
@@ -18,7 +19,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: 'myprofile', component: ProfileComponent},
+      { path: 'myprofile', component: ProfileComponent, canDeactivate: [PreventUnsavedChangedGuard]},
       { path: 'dashboard', component: DashboardComponent},
     ]
   },

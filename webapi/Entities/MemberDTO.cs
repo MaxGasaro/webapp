@@ -2,7 +2,7 @@
 
 namespace webapi.Entities
 {
-    public class MemberDTO
+    public class MemberDto
     {
         public int Id { get; set; }
         public string Username { get; set; } = string.Empty;
@@ -18,7 +18,7 @@ namespace webapi.Entities
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public List<PhotoDTO> Photos { get; set; }
+        public List<PhotoDto> Photos { get; set; }
         public int GetAge()
         {
             return DateOfBirth.CalculateAge();
