@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
         },
         error: err => {
           console.log(err);
-          this.toastr.error(err.error);
         },
         complete: () => console.log("chiamata completata") // debug
       })
