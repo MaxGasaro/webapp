@@ -29,8 +29,7 @@ export class AuthService {
       map((response: User) => {
         const user = response;
         if(user) {
-          localStorage.setItem("user", JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
         return user;
       })
@@ -55,8 +54,7 @@ export class AuthService {
     return this.http.post<User>(`${this.baseUrl}auth/register`, userRegister).pipe(
       map(user => {
         if (user) {
-          localStorage.setItem("user", JSON.stringify(user));
-          this.currentUserSource.next(user);
+          this.setCurrentUser(user);
         }
         return user;
       })

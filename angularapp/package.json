@@ -28,6 +28,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "font-awesome": "^4.7.0",
     "jest-editor-support": "*",
+    "ng2-file-upload": "^3.0.0",
     "ngx-spinner": "^15.0.1",
     "ngx-toastr": "^16.1.1",
     "rxjs": "~7.5.0",

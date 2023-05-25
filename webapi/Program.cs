@@ -1,10 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 using webapi.Data;
+using webapi.Helpers;
 using webapi.Interfaces;
 using webapi.Middleware;
 using webapi.Services;
@@ -21,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddDbContext<DataContext>(opt =>
 {
-    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+    opt.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
 });
 
 //builder.Services.AddDbContext<DataContext>(opt =>
@@ -32,7 +31,9 @@ builder.Services.AddDbContext<DataContext>(opt =>
 //builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();  
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());    
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
+builder.Services.AddScoped<IPhotoService, PhotoService>();
 builder.Services.AddHttpContextAccessor();
 
 //builder.Services.AddSwaggerGen(options =>

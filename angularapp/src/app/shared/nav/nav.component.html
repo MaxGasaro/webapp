@@ -1,6 +1,6 @@
 <div class="container-header">
   <div id="logo">
-      <img src="" alt="">
+      <img src="./assets/images/user.png" alt="">
   </div>
   <div class="menu">
       <ul>
@@ -12,16 +12,17 @@
           </li>
           <ng-container *ngIf="(authService.currentUser$ | async) as user">
             <li>
+              <img src="{{user.photoUrl || './assets/images/user.png'}}" alt="user photo">
                 <a routerLink="myprofile" routerLinkActive="active">My Profile {{user.username}}</a>
             </li>
             <li>
                 <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
             </li>
           </ng-container>
-          <li *ngIf="authService.currentUser$ | async; else logoutBlock">
+          <li *ngIf="authService.currentUser$ | async; else loginBlock">
               <a id="logout" (click)="logout()">Logout</a>
           </li>
-          <ng-template #logoutBlock>
+          <ng-template #loginBlock>
             <li>
               <a routerLink="login" routerLinkActive="active">Login</a>
             </li>

@@ -50,6 +50,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { MemberDetailComponent } from './components/member-detail/member-detail.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoadingInterceptor } from './_interceptor/loading.interceptor';
+import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   declarations: [
@@ -66,7 +68,8 @@ import { LoadingInterceptor } from './_interceptor/loading.interceptor';
     ServerErrorComponent,
     MemberListComponent,
     MemberCardComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, AppRoutingModule, NoopAnimationsModule,
@@ -82,7 +85,8 @@ import { LoadingInterceptor } from './_interceptor/loading.interceptor';
     FormsModule,
     NgxSpinnerModule.forRoot({
       type: 'pacman'
-    })
+    }),
+    FileUploadModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},

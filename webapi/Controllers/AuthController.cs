@@ -59,14 +59,16 @@ namespace webapi.Controllers
             return new UserDto
             {
                 Username = user.Username,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
             };
         }
 
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto request)
         {
-            user = await _context.Users.SingleOrDefaultAsync(x => x.Username == request.Username);
+            user = await _context.Users
+                .Include(p => p.Photos)
+                .SingleOrDefaultAsync(x => x.Username == request.Username);
 
             if(user == null)
                 return Unauthorized("Invalid Username");
@@ -84,7 +86,8 @@ namespace webapi.Controllers
             return new UserDto
             {
                 Username = user.Username,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
             };
             //return Ok(user);
             //if (user.Username != request.Username)
