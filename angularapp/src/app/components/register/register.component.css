@@ -54,6 +54,16 @@
   font-size: 0.7rem;
 }
 
+.register-box .user-box .is-invalid {
+  border-bottom: 1px solid #f43303;
+}
+.register-box .user-box .is-invalid ~ label {
+  top: -20px;
+  left: 0;
+  color: #f43303;
+  font-size: 0.7rem;
+}
+
 .register-box form button {
   position: relative;
   /* display: inline-block; */

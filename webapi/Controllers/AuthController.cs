@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -18,16 +19,16 @@ namespace webapi.Controllers
     {
         public static User user = new User();
         private readonly IConfiguration _configuration;
-        //private readonly IUserService _userService;
+        private readonly IMapper _mapper;
         private readonly DataContext _context;
         private readonly ITokenService _tokenService;
 
-        public AuthController(IConfiguration configuration, DataContext context, ITokenService tokenService)
+        public AuthController(IConfiguration configuration, DataContext context, ITokenService tokenService, IMapper mapper)
         {
             _configuration = configuration;
-            //_userService = userService;
+            _mapper = mapper;
             _context = context;
-            this._tokenService = tokenService;
+            _tokenService = tokenService;
         }
 
         //[HttpGet, Authorize]
@@ -44,6 +45,9 @@ namespace webapi.Controllers
 
             if (await UserExist(request.Username))
                 return BadRequest("Username already exist!");
+
+            user = _mapper.Map<User>(request); 
+
             using (var hmac = new HMACSHA512())
             {
                 user.Username = request.Username.ToLower();
@@ -60,6 +64,8 @@ namespace webapi.Controllers
             {
                 Username = user.Username,
                 Token = _tokenService.CreateToken(user),
+                City = user.City,
+                Country = user.Country,
             };
         }
 
@@ -87,7 +93,9 @@ namespace webapi.Controllers
             {
                 Username = user.Username,
                 Token = _tokenService.CreateToken(user),
-                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url
+                PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                City = user.City,
+                Country = user.Country,
             };
             //return Ok(user);
             //if (user.Username != request.Username)

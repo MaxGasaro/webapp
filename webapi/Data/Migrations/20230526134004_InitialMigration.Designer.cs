@@ -11,8 +11,8 @@ using webapi.Data;
 namespace webapi.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230518122739_ExtendedUserEntity")]
-    partial class ExtendedUserEntity
+    [Migration("20230526134004_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,8 +29,8 @@ namespace webapi.Data.Migrations
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("PublicId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
                         .IsRequired()
@@ -67,10 +67,6 @@ namespace webapi.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

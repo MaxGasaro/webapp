@@ -1,24 +1,47 @@
 <div class="register-container">
   <div class="register-box">
     <h2>Sign Up</h2>
-    <form [formGroup]="form" (ngSubmit)="register()">
+    <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && register()">
       <div class="user-box">
-        <input type="email" name="" required="" formControlName="email">
+        <input type="email" name="" [class.is-invalid]="registerForm.get('email')?.errors && registerForm.get('email')?.touched" required="" formControlName="email">
         <label>E-mail</label>
       </div>
       <div class="user-box">
-        <input type="text" name="" required="" formControlName="username">
+        <input type="text" name="" [class.is-invalid]="registerForm.get('username')?.errors && registerForm.get('username')?.touched" required="" formControlName="username">
         <label>Username</label>
       </div>
+      <!-- <mat-form-field>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field> -->
       <div class="user-box">
-        <input type="password" name="" required="" formControlName="password">
+        <input type="date" name="" [class.is-invalid]="registerForm.get('dateOfBirth')?.errors && registerForm.get('dateOfBirth')?.touched" required="" formControlName="dateOfBirth">
+        <label>Date of Birth</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="" [class.is-invalid]="registerForm.get('city')?.errors && registerForm.get('city')?.touched" required="" formControlName="city">
+        <label>City</label>
+      </div>
+      <div class="user-box">
+        <input type="text" name="" [class.is-invalid]="registerForm.get('country')?.errors && registerForm.get('country')?.touched" required="" formControlName="country">
+        <label>Country</label>
+      </div>
+      <div class="user-box">
+        <input type="password" name="" [class.is-invalid]="registerForm.get('password')?.errors && registerForm.get('password')?.touched" required="" formControlName="password">
         <label>Password</label>
       </div>
       <div class="user-box">
-        <input type="password" name="" required="" formControlName="confirmPassword">
+        <input type="password" name="" [class.is-invalid]="registerForm.get('confirmPassword')?.errors && registerForm.get('confirmPassword')?.touched" required="" formControlName="confirmPassword">
         <label>Confirm Password</label>
       </div>
-      <button type="submit">
+      <div *ngIf="validationErrors">
+        <ul>
+          <li *ngFor="let error of validationErrors">{{error}}</li>
+        </ul>
+      </div>
+      <button type="submit" [disabled]="!registerForm.valid">
         <span></span>
         <span></span>
         <span></span>
@@ -28,3 +51,6 @@
     </form>
   </div>
 </div>
+
+<p>Form value: {{registerForm.value | json}}</p>
+<p>Form status: {{registerForm.status | json}}</p>
