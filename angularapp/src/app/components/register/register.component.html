@@ -17,13 +17,13 @@
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field> -->
       <div class="user-box">
-        <input type="date" name="" [class.is-invalid]="registerForm.get('dateOfBirth')?.errors && registerForm.get('dateOfBirth')?.touched" required="" formControlName="dateOfBirth">
+        <input type="date" placeholder="" name="" [class.is-invalid]="registerForm.get('dateOfBirth')?.errors && registerForm.get('dateOfBirth')?.touched" required="" formControlName="dateOfBirth">
         <label>Date of Birth</label>
       </div>
-      <div class="user-box">
+      <!-- <div class="user-box">
         <input type="text" name="" [class.is-invalid]="registerForm.get('city')?.errors && registerForm.get('city')?.touched" required="" formControlName="city">
         <label>City</label>
-      </div>
+      </div> -->
       <div class="user-box">
         <input type="text" name="" [class.is-invalid]="registerForm.get('country')?.errors && registerForm.get('country')?.touched" required="" formControlName="country">
         <label>Country</label>

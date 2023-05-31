@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   height: calc(100vh - 50px);
+  padding: 2rem 0;
   background-color: #fee195;
 }
 
@@ -15,7 +16,7 @@
 }
 
 .register-box h2 {
-  margin: 0 0 30px 0;
+  margin: 0 0 0.6rem 0;
   color: #fff;
   text-align: center;
 }
@@ -29,7 +30,7 @@
   padding: 10px 0;
   font-size: 1.2rem;
   color: #fff;
-  margin-bottom: 30px;
+  margin-bottom: 1rem;
   border: none;
   border-bottom: 1px solid #fff;
   outline: none;

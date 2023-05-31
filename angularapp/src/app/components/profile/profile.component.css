@@ -1,0 +1,53 @@
+.container.profile {
+  width: 50%;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fee095;
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+  border-radius: 10px;
+  border: 1px solid #a6a6a6;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.container .user-box {
+  position: relative;
+}
+
+.container>* {
+  margin: 0.5rem 0;
+  color: #fff;
+  width: 100%;
+}
+
+.buttons {
+  justify-content: flex-end;
+}
+
+.container .user-box>textarea,
+.container .user-box>input {
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+  padding: 10px 0;
+  font-size: 1.2rem;
+  color: #fff;
+  width: 100%;
+}
+
+.container .user-box>textarea::placeholder {
+  color: #fff;
+}
+
+.buttons>button {
+  background-color: rgb(35, 150, 233);
+  color: #fff;
+}
+
+.container form>h4 {
+  margin: 1.4rem 0;
+}
+
+

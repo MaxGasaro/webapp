@@ -37,6 +37,7 @@ export class AuthService {
   }
 
   public setCurrentUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
   }
 
@@ -61,9 +62,4 @@ export class AuthService {
     );
   }
 
-  public getMe(): Observable<string> {
-    return this.http.get('https://localhost:7009/api/Auth', {
-      responseType: 'text',
-    });
-  }
 }

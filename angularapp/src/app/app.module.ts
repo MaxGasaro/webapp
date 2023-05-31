@@ -29,7 +29,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 // Font Awesome
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
-import { faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { faSquare, faCheckSquare, faTrash, faArrowCircleUp } from '@fortawesome/free-solid-svg-icons';
 import {
   faSquare as farSquare,
   faCheckSquare as farCheckSquare,
@@ -115,7 +115,9 @@ export class AppModule {
       faFacebook,
       faTwitter,
       faLinkedin,
-      faYoutube
+      faYoutube,
+      faTrash,
+      faArrowCircleUp
     )
   }
 }

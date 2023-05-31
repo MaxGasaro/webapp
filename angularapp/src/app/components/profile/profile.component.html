@@ -1,20 +1,25 @@
-<div *ngIf="member">
-  <h1>Your Profile</h1>
-  <h3 *ngIf="member">{{member.knownAs}}</h3>
+<div class="container profile" *ngIf="member">
+  <h1 id="title">Your Profile: {{member.username.toUpperCase()}}</h1>
   <p *ngIf="editForm.dirty"><strong>Information: </strong>You have made changes. Any unsaved changes will be lost</p>
   <div><strong>Location: </strong>{{member.city}}</div>
   <div><strong>Age: </strong>{{member.age}}</div>
   <div><strong>Last Active: </strong>{{member.lastActive}}</div>
-  <div><strong>Member Since: </strong>{{member.created}}</div>
-  <div>
+  <div class="buttons">
     <button [disabled]="!editForm.dirty" type="submit" form="editForm">Save changes</button>
   </div>
+  <h3>Edit Profile</h3>
   <form [formGroup]="editForm" id="editForm" (ngSubmit)="updateMember()">
-    <textarea name="description" id="" rows="6" formControlName="introduction"></textarea>
-    <textarea name="lookingFor" id="" rows="6" formControlName="lookingFor"></textarea>
-    <textarea name="interests" id="" rows="6" formControlName="interests"></textarea>
+    <div class="user-box">
+      <textarea placeholder="Description" name="description" id="" rows="6" formControlName="introduction"></textarea>
+    </div>
+    <div class="user-box">
+      <textarea placeholder="Looking For" name="lookingFor" id="" rows="6" formControlName="lookingFor"></textarea>
+    </div>
+    <div class="user-box">
+      <textarea name="interests" placeholder="Interests" id="" rows="6" formControlName="interests"></textarea>
+    </div>
     <h4>Location Details: </h4>
-    <div>
+    <div class="user-box">
       <label for="city">City: </label>
       <input type="text" formControlName="city" name="city">
       <label for="country">Country: </label>
@@ -24,4 +29,5 @@
   <div class="photo">
     <h3>Edit Photos</h3>
   </div>
+  <app-photo-editor [member]="member"></app-photo-editor>
 </div>
