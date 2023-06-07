@@ -37,6 +37,16 @@ li>a{
   color: #000;
 }
 
+#profile {
+  display: flex;
+  align-items: center;
+}
+
+#profile>img {
+  border-radius: 50%;
+  margin: 0 0.5rem;
+}
+
 .active {
   font-weight: bolder;
 }

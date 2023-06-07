@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(user).subscribe({
         next: result => {
           console.log(result); // debug
-          this.router.navigateByUrl("member-list");
+          this.router.navigateByUrl("myprofile");
         },
         error: err => {
           console.log(err);

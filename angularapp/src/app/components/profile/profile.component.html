@@ -5,7 +5,7 @@
   <div><strong>Age: </strong>{{member.age}}</div>
   <div><strong>Last Active: </strong>{{member.lastActive}}</div>
   <div class="buttons">
-    <button [disabled]="!editForm.dirty" type="submit" form="editForm">Save changes</button>
+    <button [disabled]="!editForm.dirty" type="submit" form="editForm" [ngClass]="!editForm.dirty ? 'button-disabled' : ''">Save changes</button>
   </div>
   <h3>Edit Profile</h3>
   <form [formGroup]="editForm" id="editForm" (ngSubmit)="updateMember()">

@@ -23,9 +23,9 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent},
     ]
   },
-  { path: 'member-list', component: MemberListComponent},
-  { path: 'member-list/:username', component: MemberDetailComponent},
-  { path: 'errors', component: TestErrorComponent},
+  // { path: 'member-list', component: MemberListComponent},
+  //{ path: 'member-list/:username', component: MemberDetailComponent},
+  //{ path: 'errors', component: TestErrorComponent},
   { path: 'not-found', component: NotFoundComponent},
   { path: 'server-error', component: ServerErrorComponent},
   { path: 'homepage', component: HomepageComponent},

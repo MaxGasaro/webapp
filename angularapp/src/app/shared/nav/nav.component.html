@@ -7,13 +7,10 @@
           <li>
               <a routerLink="homepage" routerLinkActive="active">Homepage</a>
           </li>
-          <li>
-              <a routerLink="errors" routerLinkActive="active">Errors</a>
-          </li>
           <ng-container *ngIf="(authService.currentUser$ | async) as user">
-            <li>
+            <li id="profile">
               <img src="{{user.photoUrl || './assets/images/user.png'}}" alt="user photo">
-                <a routerLink="myprofile" routerLinkActive="active">My Profile {{user.username}}</a>
+              <a routerLink="myprofile" routerLinkActive="active">My Profile {{user.username}}</a>
             </li>
             <li>
                 <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
