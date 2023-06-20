@@ -18,6 +18,7 @@ namespace webapi.Entities
         public string City { get; set; } = string.Empty;    
         public string Country { get; set; } = string.Empty;
         public List<Photo> Photos { get; set; } = new List<Photo>();
+        public List<Expenses> Expenses { get; set; } = new List<Expenses>();
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string RefreshToken { get; set; } = string.Empty;
